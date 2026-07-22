@@ -1,9 +1,18 @@
 // ===================================================
 // CONFIGURAÇÃO DA API
-// Quando o frontend for servido pelo FastAPI (Dia 3), a API está
-// no mesmo servidor — usamos uma URL relativa ou o endereço completo.
+// Em desenvolvimento utiliza localhost.
+// Em produção utiliza o mesmo domínio da aplicação.
 // ===================================================
-const API_BASE_URL = "http://localhost:8000";
+
+const isLocal =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+
+const API_BASE_URL =
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:8000"
+        : "";
 
 // ===================================================
 // FUNÇÃO: Preenche os slots do álbum com imagens da API
@@ -39,6 +48,7 @@ async function preencherFigurinhas() {
 
             // A figurinha existe: insere a imagem
             const figurinha = porId.get(id);
+            if (!figurinha) continue;
 
             const img = document.createElement("img");
             img.src = `${API_BASE_URL}${figurinha.imagem_url}`;
@@ -55,7 +65,14 @@ async function preencherFigurinhas() {
 
     } catch (erro) {
         console.warn("⚠️  Não foi possível conectar à API do backend:", erro.message);
-        console.info("ℹ️  Inicie o servidor: cd backend/dia-3 && uvicorn main:app --reload");
+        console.info(`
+ℹ️ Backend indisponível.
+
+Para desenvolvimento execute:
+
+cd backend
+uvicorn main:app --reload
+`);
     }
 }
 
@@ -203,8 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Show book after successful initialization
         bookElement.style.display = "block";
 
-        // Dia 3: Busca as figurinhas da API e preenche o álbum
-        // A função é async, chamamos sem await para não bloquear a inicialização do álbum
+       // Carrega as figurinhas da API e preenche o álbum dinamicamente.
+       // A chamada é assíncrona para não bloquear a inicialização da interface.
         preencherFigurinhas();
 
     } catch (error) {

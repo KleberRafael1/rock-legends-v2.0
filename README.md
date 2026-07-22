@@ -1,8 +1,10 @@
-# 🤘 Rock Legends - Álbum de Figurinhas
+# 🤘 Rock Legends v2.0 — Digital Sticker Album
 
-> Um álbum de figurinhas digital inspirado nos clássicos álbuns colecionáveis, desenvolvido com **HTML, CSS, JavaScript e FastAPI**, proporcionando uma experiência interativa com animações 3D, efeitos sonoros e carregamento dinâmico das figurinhas.
+> Um álbum de figurinhas digital inspirado nos clássicos álbuns colecionáveis, desenvolvido com **HTML, CSS, JavaScript e FastAPI**, utilizando arquitetura Full Stack e preparado para deploy serverless na Vercel.
+
 
 ![Status](https://img.shields.io/badge/status-concluído-success)
+![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
 ![HTML5](https://img.shields.io/badge/HTML-5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS-3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
@@ -13,29 +15,55 @@
 
 # 📖 Sobre o projeto
 
-O **Rock Legends** é uma aplicação web que recria a experiência clássica de colecionar um álbum de figurinhas, agora em formato digital.
+O Rock Legends v2.0 é uma aplicação web que recria a experiência nostálgica de colecionar um álbum de figurinhas, trazendo grandes nomes da história do Rock para uma experiência digital interativa.
 
-Inspirado nos tradicionais álbuns físicos, o projeto reúne **30 grandes nomes da história do Rock e Heavy Metal**, organizados em categorias temáticas. As páginas podem ser folheadas com animações tridimensionais realistas, acompanhadas por efeitos sonoros sintetizados utilizando a Web Audio API.
+O projeto reúne 30 lendas do Rock e Heavy Metal, organizadas em categorias temáticas, apresentadas em um álbum virtual com animações tridimensionais de páginas, efeitos sonoros e uma interface inspirada na estética Rock.
 
-Além da experiência visual, o projeto possui um backend desenvolvido em **FastAPI**, responsável por fornecer os dados das figurinhas e disponibilizar as imagens dinamicamente através de uma API REST.
+A versão 2.0 evoluiu para uma aplicação Full Stack, separando o frontend da camada de dados e utilizando uma API REST desenvolvida com FastAPI para carregar dinamicamente informações e imagens das figurinhas.
 
-O resultado é uma aplicação moderna que une frontend interativo, backend em Python e uma interface inspirada na estética do Rock.
+A aplicação também foi preparada para execução em produção utilizando deploy serverless através da Vercel.
 
 ---
 
 # ✨ Funcionalidades
 
 - 📖 Álbum digital com efeito realista de virada de páginas
-- 🎵 Som de páginas utilizando Web Audio API
+- 🎸 Interface inspirada em Rock e Heavy Metal
 - 🖼️ Carregamento dinâmico das figurinhas através de API REST
-- 🎨 Interface inspirada na estética do Rock e Heavy Metal
 - ⚡ Efeito Glitch na capa
-- 🌑 Layout Dark Theme
-- 💻 Interface responsiva
-- ⌨️ Navegação pelo teclado
-- 🖱️ Arraste manual das páginas
-- 📱 Compatível com dispositivos móveis
+- 🌑 Tema Dark Rock
+- 🔊 Som de páginas utilizando Web Audio API
+- 🖱️ Navegação por arraste manual
+- ⌨️ Controle através do teclado
+- 📱 Layout responsivo
 - 🚀 Backend desenvolvido com FastAPI
+- ☁️ Deploy preparado para Vercel
+
+---
+
+
+# 🏗️ Arquitetura
+
+A aplicação segue uma arquitetura Full Stack desacoplada.
+
+```text
+Frontend (HTML/CSS/JavaScript)
+            │
+            │ Fetch API
+            ▼
+ FastAPI (API REST)
+            │
+            ▼
+figurinhas.json
+            │
+            ▼
+assets/figurinhas
+
+```
+
+
+O frontend consome os dados através de uma API REST, responsável por fornecer tanto os metadados das figurinhas quanto as imagens dinamicamente. Essa arquitetura facilita a manutenção, escalabilidade e o deploy utilizando Serverless Functions na Vercel.
+
 
 ---
 
@@ -74,25 +102,38 @@ Total de **30 figurinhas**.
 - Uvicorn
 - CORS Middleware
 
+## Deploy
+
+- Vercel
+- Serverless Functions
+- JSON como fonte de dados
+
 ---
 
 # 📂 Estrutura do Projeto
 
 ```text
-Rock-Legends/
+Rock-Legends-v2.0/
 │
-├── index.html
-├── style.css
-├── app.js
+├── api/
+│   └── index.py
+│
+├── assets/
+│   └── figurinhas/
+│
+├── data/
+│   └── figurinhas.json
+│
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+│
+├── .gitignore
 ├── README.md
-│
-└── backend/
-    │
-    ├── main.py
-    ├── figurinhas/
-    │
-    ├── .venv/
-    └── __pycache__/
+├── requirements.txt
+└── vercel.json
+
 ```
 
 ---
@@ -109,13 +150,8 @@ Entre na pasta do projeto.
 
 ---
 
-## 2️⃣ Backend
 
-Entre na pasta do backend:
-
-```bash
-cd backend
-```
+## 2️⃣ Ambiente Python
 
 Crie um ambiente virtual:
 
@@ -129,6 +165,7 @@ Ative o ambiente virtual.
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
+
 ```
 
 ### Linux / macOS
@@ -140,13 +177,13 @@ source .venv/bin/activate
 Instale as dependências:
 
 ```bash
-pip install fastapi uvicorn
+pip install -r requirements.txt
 ```
 
 Execute o servidor:
 
 ```bash
-python -m uvicorn main:app --reload
+python -m uvicorn api.index:app --reload
 ```
 
 O backend ficará disponível em:
@@ -248,15 +285,14 @@ Em dispositivos móveis o álbum passa automaticamente para visualização de p�
 
 # 🚀 Próximas Melhorias
 
-- [ ] Banco de dados para persistência da coleção
-- [ ] Login de usuários
-- [ ] Sistema de troca de figurinhas
+- [ ] Sistema de autenticação
+- [ ] Banco de dados
+- [ ] Área administrativa
 - [ ] Figurinhas raras
-- [ ] Sistema de progresso do álbum
-- [ ] Compartilhamento em redes sociais
-- [ ] Deploy da API
-- [ ] Deploy do Frontend
-- [ ] Painel administrativo para cadastro de artistas
+- [ ] Sistema de coleção do usuário
+- [ ] Busca por artista
+- [ ] Favoritos
+- [ ] Modo offline (PWA)
 
 ---
 
@@ -274,6 +310,8 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 - CSS Animations
 - Web Audio API
 - Organização de projetos Full Stack
+- Arquitetura Serverless
+- Organização de APIs para Deploy na Vercel
 
 ---
 
@@ -281,15 +319,17 @@ Durante o desenvolvimento deste projeto foram praticados conceitos como:
 
 **Kleber Rafael Silva**
 
-Analista Fiscal Tech • Desenvolvedor Full Stack • Especialista em Inteligência Artificial
+
+**Analista Fiscal Tech | Desenvolvedor Full Stack | Especialista em Inteligência Artificial**
+
 
 ### GitHub
 
-https://github.com/seu-usuario
+https://github.com/KleberRafael1
 
 ### LinkedIn
 
-https://linkedin.com/in/seu-perfil
+https://www.linkedin.com/in/kleber-rafael-silva
 
 ---
 
