@@ -345,9 +345,9 @@ btnPrev.addEventListener("click", (e) => {
     console.log("BOTÃO VOLTAR");
     console.log("Página atual:", pageFlip.getCurrentPageIndex());
 
+    playPaperTurnSound();
     pageFlip.turnToPrevPage();
 });
-
 
 
 btnNext.addEventListener("click", (e) => {
@@ -356,16 +356,9 @@ btnNext.addEventListener("click", (e) => {
 
     console.log("AVANÇOU");
 
+    playPaperTurnSound();
     pageFlip.turnToNextPage();
 });
-        // Keyboard events for navigational arrows
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") {
-                pageFlip.flipPrev();
-            } else if (e.key === "ArrowRight") {
-                pageFlip.flipNext();
-            }
-        });
 
         // Hide left button initially since start page is 0
         btnPrev.classList.add("hidden");
