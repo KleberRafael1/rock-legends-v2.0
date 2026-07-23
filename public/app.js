@@ -129,7 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             page.addEventListener("touchstart", (e) => {
-                if (e.target.closest("button") || e.target.closest("a")) return;
+
+    if (e.target.closest("button") || e.target.closest("a")) {
+        return;
+    }
                 const touch = e.touches[0];
                 isClicking = true;
                 startX = touch.clientX;
@@ -334,14 +337,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Click events for navigational arrows
-        btnPrev.addEventListener("click", () => {
-            pageFlip.flipPrev();
-        });
+// Click events for navigational arrows
+btnPrev.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-        btnNext.addEventListener("click", () => {
-            pageFlip.flipNext();
-        });
+    console.log("BOTÃO VOLTAR");
+    console.log("Página atual:", pageFlip.getCurrentPageIndex());
 
+    pageFlip.turnToPrevPage();
+});
+
+
+
+btnNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("AVANÇOU");
+
+    pageFlip.turnToNextPage();
+});
         // Keyboard events for navigational arrows
         document.addEventListener("keydown", (e) => {
             if (e.key === "ArrowLeft") {

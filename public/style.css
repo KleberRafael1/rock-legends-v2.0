@@ -54,7 +54,9 @@ body {
 }
 
 .hidden {
-  display: none !important;
+  visibility: hidden !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Navigation UI */
@@ -307,6 +309,12 @@ body.dragging * {
   border-radius: 4px;
   opacity: 0;
   animation: sticker-aparecer 0.5s ease-out forwards;
+ 
+}
+
+.special-slot .sticker-img {
+  object-fit: contain;
+  padding: 5px;
 }
 
 /* Slot com imagem: remove padding e corta o overflow */
@@ -916,6 +924,25 @@ body.dragging * {
   }
 }
 
+button {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
   /* In portrait/mobile mode, StPageFlip will show single pages */
   .album-viewport {
@@ -949,6 +976,10 @@ body.dragging * {
     min-height: 110px;
     width: 90%;
   }
+ .special-slot .sticker-img {
+    object-fit: contain;
+  }
+
   .slot-number {
     width: 32px;
     height: 32px;
@@ -994,4 +1025,18 @@ body.dragging * {
     width: 40px;
     height: 40px;
   }
+.special-slot {
+  width: 70%;
+  min-height: 100px;
+}
+
+.special-slot .sticker-img {
+  object-fit: contain;
+}
+
+.nav-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
 }
